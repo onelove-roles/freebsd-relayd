@@ -1,0 +1,21 @@
+---
+- name: install packages
+  with_items: "{{ relayd_packages }}"
+  pkgng:
+    name: "{{ item.name }}"
+  notify:
+    - restart relayd
+
+# - name: configure relayd
+#   template:
+#     src: relayd.conf.j2
+#     dest: /usr/local/etc/relayd.conf
+#   notify:
+#     - restart relayd
+
+- name: enable relayd
+  template:
+    src: relayd.j2
+    dest: /etc/rc.conf.d/relayd
+  notify:
+    - restart relayd

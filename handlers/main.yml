@@ -1,0 +1,5 @@
+---
+- name: restart relayd
+  service:
+    name: relayd
+    state: restarted
